@@ -11,10 +11,10 @@
   "profiles": {
     "CourseLibrary.API": {
       "commandName": "Project",
+      "applicationUrl": "http://localhost:7499",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:5000",
       "dotnetRunMessages": true
     },
     "IIS Express": {

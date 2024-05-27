@@ -108,16 +108,14 @@ public class CourseLibraryRepository : ICourseLibraryRepository
         _context.Authors.Remove(author);
     }
 
-    public async Task<Author> GetAuthorAsync(Guid authorId)
+    public async Task<Author?> GetAuthorAsync(Guid authorId)
     {
         if (authorId == Guid.Empty)
         {
             throw new ArgumentNullException(nameof(authorId));
         }
 
-#pragma warning disable CS8603 // Possible null reference return.
         return await _context.Authors.FirstOrDefaultAsync(a => a.Id == authorId);
-#pragma warning restore CS8603 // Possible null reference return.
     }
 
    
