@@ -78,6 +78,7 @@ public class AuthorsController : ControllerBase
         {
             _courseLibraryRepository.AddAuthor(author);
         }
+
         await _courseLibraryRepository.SaveAsync();
 
         var authorsToReturn = _mapper.Map<IEnumerable<AuthorDto>>(authorsEntity);
@@ -95,7 +96,7 @@ public class AuthorsController : ControllerBase
     public async Task<ActionResult<IEnumerable<AuthorDto>>>
         GetAuthorsCollection(
         [ModelBinder(BinderType = typeof(ArrayModelBinder))]
-         [FromRoute] IEnumerable<Guid> authorsId)
+        [FromRoute] IEnumerable<Guid> authorsId)
     {
         var authorsEntities = await _courseLibraryRepository
             .GetAuthorsAsync(authorsId);
@@ -109,5 +110,12 @@ public class AuthorsController : ControllerBase
 
         return Ok(authorsToReturn);
 
+    }
+
+    [HttpOptions]
+    public IActionResult GetAuthorsOptions()
+    {
+        Response.Headers.Add("Allow", "GET,HEAD,POST,OPTIONS");
+        return Ok();
     }
 }
